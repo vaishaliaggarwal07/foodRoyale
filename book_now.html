@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+    <title>Book Now</title>
+    <link rel="stylesheet" href="css/book_styles.css">
+
+</head>
+<body>
+  <header>
+    <img src="images/hot.png" alt="Food Royale's Logo" class="logo">
+    <h2 class="logo-text">FOOD ROYALE</h2>
+    <nav>
+      <ul class="primary-menu">
+        <li><a href="contact.html">CONTACT</a></li>
+        <li><a href="about.html">ABOUT</a></li>
+        <li><a href="book_now.html">BOOK NOW</a></li>
+        <li><a href="menu.html">MENU</a></li>
+        <li><a href="index.html">HOME</a></li>
+      </ul>
+    </nav>
+  </header>
+    <div class="container">
+        <div class="title">Book Now </div>
+            <form action="#">
+               <div class="user-details">
+                   <div>
+                       <span class="details">Full Name</span>
+
+                       <input type="text" class="input-box" id="fullname"placeholder="Enter your name" required>
+
+                   </div>
+                   <div >
+                    <span class="details">Date</span>
+                    <input type="date" class="input-box" id="date" placeholder="Enter date" required>
+                   </div>
+                    <div >
+                    <span class="details">Time</span>
+                    <input type="time" class="input-box"id="time" placeholder="Enter time" required>
+                    </div>
+                    <div>
+                    <span class="details">Phone Number</span>
+                    <input type="text" class="input-box"id="phonenumber" placeholder="Enter phone number" required>
+                    </div>
+                    <div>
+                    <span class="details">No. of guests</span>
+                    <input type="text" class="input-box"id="guests"placeholder="Enter number of guests">
+                     </div>
+               </div>
+                <div >
+                    <input class="button"type="submit" id="bt"value="Submit" onclick="saveFile()">
+                </div>
+            </form>
+
+    </div>
+    <script>
+        let saveFile = () => {
+            // Get the data from each element on the form.
+            const fullname = document.getElementById("fullname");
+            const date = document.getElementById("date");
+            const time = document.getElementById("time");
+            const phonenumber = document.getElementById("phonenumber");
+            const guests = document.getElementById("guests");
+
+            // This variable stores all the data.
+            let data = "\r Name: " + fullname.value + " \r\n " + "Date: " + date.value + " \r\n " + "Time: " + time.value + " \r\n " + "Phone Number: " + phonenumber.value + " \r\n " + "Guests: " + guests.value;
+
+            const textToBLOB = new Blob([data], { type: "text/plain" });
+            const sfilename ='formData.txt';
+
+
+            let newLink = document.createElement("a");
+            newLink.download = sfilename;
+
+            if (window.webkitURL != null) {
+                newLink.href = window.webkitURL.createObjectURL(textToBLOB);
+            } else {
+                newLink.href = window.URL.createObjectURL(textToBLOB);
+                newLink.style.display = "none";
+                document.body.appendChild(newLink);
+            }
+
+            newLink.click();
+        }
+    </script>
+</body>
+</html>
